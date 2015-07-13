@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Order Manegement</title>
+</head>
+<body ng-controller="storeController">
+
+
+<table class="table table-bordered">
+		<tr >
+			<td>Order Id</td>
+			<td><input type="text" ng-model="orderId" /></td>
+		</tr>
+		<tr >
+			<td>Product ID</td>
+			<td><input type="text" ng-model="prodId" /></td>
+		</tr>
+		<tr >
+			<td>Product Price</td>
+			<td><input type="text" ng-model="prodPrice" /></td>
+		</tr>
+		<tr >
+			<td>Product Quantity</td>
+			<td><input type="text" ng-model="prodQuant" /></td>
+		</tr>
+		
+		<tr>
+			<td><button 
+					ng-click="placeOrder(orderId,prodId,prodPrice,prodQuant)"> Order</button></td>
+			</tr>
+	</table>
+
+
+
+
+<table class="table table-bordered" ng-init="orderDetails()">
+		<tr class="well">
+			<td>Order Id</td>
+			<td>Product Id</td>
+			<td>Product Quantity</td>
+			<td>Product Price</td>
+		</tr>
+		
+		<tr ng-repeat="user in users"> 		      
+		      <td>{{user.sku}}</td>
+		     <td>{{user.name}}</td>
+		     <td>{{user.pass}}</td> 
+			
+			<td>{{user.firstName}}</td>
+			<td>{{user.middlename}}</td>
+			<td>{{user.lname}}</td>
+			<td>{{user.addressLine1}}</td>
+			<td>{{user.addressLine2}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.city}}</td>
+			<td>{{user.state}}</td>
+			<td>{{user.userType}}</td>
+			
+			
+			
+			
+			
+			
+		</tr>
+		
+	</table>
+
+</body>
+</html>

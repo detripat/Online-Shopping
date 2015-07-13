@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body ng-controller="storeController">
+	<Center> Product Management Page</Center>
+	<table class="table table-bordered">
+		<tr >
+			<td>Product name</td>
+			<td><input type="text" ng-model="prodName" /></td>
+		</tr>
+		<tr >
+			<td>Product Description</td>
+			<td><input type="text" ng-model="prodDesc" /></td>
+		</tr>
+		<tr >
+			<td>Product Price</td>
+			<td><input type="text" ng-model="prodPrice" /></td>
+		</tr>
+		<tr >
+			<td>Product Quantity</td>
+			<td><input type="text" ng-model="prodQuant" /></td>
+		</tr>
+		<tr >
+			<td>Product Category</td>
+			<td><select ng-init="getAllCategory()" ng-model="category">
+					<option ng:repeat="cat in categorys" value="{{cat.catId}}">{{cat.CatName}}</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td><button 
+					ng-click="productManageAdd(prodName,prodDesc,prodPrice,prodQuant,category)">Add Product</button></td>
+			</tr>
+	</table>
+
+	<table class="table table-bordered" ng-init="productManageAll()">
+		<tr class="well">
+			<td>Product name</td>
+			<td>Product Description</td>
+			<td>Product Price</td>
+			<td>Product Quantity</td>
+			<td>Product Category</td>
+			<td>Delete</td>
+			<!-- <td>Edit</td> -->
+			
+		</tr>
+		<tr  ng-repeat="product in products">
+			<td>{{product.name}}</td>
+			<td>{{product.description}}</td>
+			<td>{{product.price}}</td>
+			<td>{{product.quantity}}</td>
+			<td>{{product.catagoryName}}</td>
+			<td><a ng-click="deleteProduct(product.sku)"
+				>delete</a></td>
+				<!-- <td><a ng-click="editProduct(product)"
+				>edit</a></td> -->
+		</tr>
+	</table>
+
+</body>
+</html>

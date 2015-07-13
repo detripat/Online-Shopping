@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body ng-controller="storeController">
+<Center> User Details</Center>
+
+
+
+<table class="table table-bordered" ng-init="userDetails()">
+		<tr class="well">
+			<td>User ID</td>
+			<td>User Name</td>
+			<td>password</td>
+			<td>First Name</td>
+			<td>Middle Name</td>
+			<td>Last Name</td>
+			<td>Address1</td>
+			<td>Address2</td>
+			<td>Email</td>
+			<td>City</td>
+			<td>State</td>
+			<td>User Type</td>
+			
+	
+			
+			<!-- <td>Edit</td>
+			<td>Delete</td> -->
+		</tr>
+		
+		<tr ng-repeat="user in users"> 		      
+		      <td>{{user.sku}}</td>
+		     <td>{{user.name}}</td>
+		     <td>{{user.pass}}</td> 
+			
+			<td>{{user.firstName}}</td>
+			<td>{{user.middlename}}</td>
+			<td>{{user.lname}}</td>
+			<td>{{user.addressLine1}}</td>
+			<td>{{user.addressLine2}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.city}}</td>
+			<td>{{user.state}}</td>
+			<td>{{user.userType}}</td>
+			
+			
+			
+			
+			
+			
+		</tr>
+		
+	</table>
+</body>
+</html>
+
+
+
+
+

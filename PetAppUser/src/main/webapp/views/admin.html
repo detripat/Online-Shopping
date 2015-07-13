@@ -1,0 +1,102 @@
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="span10 offset1">
+			<div class="control-group">
+    <div class="controls">
+				<dialog id="userLoginDialog"
+					ng-controller="storeController">
+
+				<form name="form" ng-submit="vm.login()" role="form">
+					<div class="form-group"
+						ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+						<label for="username">Username</label> <input type="text"
+							ng-model="uname" required placeholder="Enter username"> <span
+							ng-show="form.username.$dirty && form.username.$error.required"
+							class="help-block">Username is required</span>
+					</div>
+					<div class="form-group"
+						ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+						<label for="password">Password</label> <input type="password"
+							ng-model="password" required placeholder="Enter password">
+						<span
+							ng-show="form.password.$dirty && form.password.$error.required"
+							class="help-block">Password is required</span>
+					</div>
+					<div class="form-actions">
+						
+						<button ng-click="loginUser(uname,password)">login</button>
+
+						<input type="submit" value="SignUp" onclick="userRegister()">
+					</div>
+				</form>
+
+				</dialog>
+<dialog id="userRegisterDialog"
+					ng-controller="storeController">
+
+
+				<form name="form">
+					<div>
+						<label for="username">First name</label> <input type="text"
+							ng-model="firstname" required placeholder="Enter First Name">
+			
+					</div>
+					<div >
+						<label for="username">Last name</label> <input type="text"
+							ng-model="lastname" required placeholder="Enter Last Name">
+						
+					</div>
+					
+					<div >
+						<label for="middlename">Middle name</label> <input type="text"
+							ng-model="middlename" required placeholder="Enter middle Name">
+						
+					</div>
+					
+					
+					
+					<div >
+						<label for="address">Address</label> <input type="text"
+							ng-model="address" required placeholder="Enter your Address">
+						
+					</div>
+					
+					
+					
+					<div >
+						<label for="username">Username</label> <input type="text" required
+							ng-model="username" placeholder="Enter username"> 
+					</div>
+					<div>
+						<label for="password">Password</label> <input type="password"
+							required ng-model="password" placeholder="Enter password">
+						
+					</div>
+					<div class="form-actions">
+						<td align="right">
+							<button
+								ng-click="registerNewUser(firstname,lastname,middlename,username,address,password)">Register</button>&nbsp;&nbsp;&nbsp;
+							<input type="submit" value="Cancel" onclick="closeDialog()">
+						</td>
+
+
+					</div>
+				</form>
+
+				</dialog>
+
+
+
+				&nbsp;&nbsp;&nbsp;<a href=""   onclick="userLogin()">Login/Register</a><br>
+				<!-- <input type="text" id="userNameId" style="border-color: white"
+					align="right" readonly value="Welcome Guest" /> -->
+				<h4 class="success"> Pet WebShop</h4>
+				</div>
+</div>
+				<div ng-view></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+<body>
+	<Center>Category</Center>
+	<table class="table table-bordered">
+		<tr class="well">
+			<td>Category name</td>
+			<td><input type="text" ng-model="catagoryName" /></td>
+		</tr>
+		<!-- <tr class="well">
+			<td>Category Description</td>
+			<td><input type="text" ng-modle="categoryDesc" /></td>
+		</tr> -->
+		<tr class="well">
+			<td><button  ng-click="addCategory(catagoryName)">Add Category</button></td>
+		</tr>
+	</table>
+
+	<table class="table table-bordered" ng-init="getAllCategory()">
+		<tr class="well">
+			<td>Category name</td>
+			<td>Category Id</td>
+			<!-- <td>Edit</td>
+			<td>Delete</td> -->
+		</tr>
+		
+		
+		<tr  ng-repeat=" category in categorys ">
+			<td>{{category.catagoryName}}</td>
+			<td>{{category.catagoryId}}</td>
+			
+			</tr>
+	</table>
+</body>
+</html>

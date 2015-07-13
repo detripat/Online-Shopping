@@ -1,0 +1,56 @@
+
+<p align="center">
+	<tr class="success">
+		Search:
+		<input ng-model="search" class="span2 search-query"></span>&nbsp;&nbsp;&nbsp;
+
+		Category:item
+		<select ng-model="selectedItem" class="btn dropdown-toggle">
+			<option ng-repeat="product in store.products"
+				value="{{product.catagoryName}}">{{product.catagoryName}}</option>
+		</select>
+	</tr>
+</p>
+
+
+
+<table>
+
+ 
+	<tr>
+
+		<td><b>ProductName</b></td>
+		<td><b>ProductCatagoryName</b></td>
+		<td><b>ProductDesc</b></td>
+		<td><b>ProductPrice</b></td>
+	</tr>
+	<tr >
+		<td class="tdRight" colspan="5"><a href="index.htm#/cart"
+			title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+				<i class="icon-shopping-cart" /> <b>{{cart.getTotalCount()}}</b>
+				items, <b>{{cart.getTotalPrice() | currency}}</b>
+		</a></td>
+	</tr>
+	<tr
+		ng-repeat="product in store.products | orderBy:'name' | filter:search | filter:selectedItem" class="success">
+
+
+		<td>{{product.name}}</td>
+		<td>{{product.catagoryName}}</td>
+		<td>{{product.description}}</td>
+		<td>{{product.price | currency}} </br> <br> <a href=""
+			ng-click="cart.addItem(product.sku, product.name, product.price, 1)">
+				add to cart </a>
+		</td>
+		
+	</tr>
+
+	<tr>
+		<td class="tdRight" colspan="5"><a href="index.htm#/cart"
+			title="go to shopping cart" ng-disabled="cart.getTotalCount() < 1">
+				<i class="icon-shopping-cart" /> <b>{{cart.getTotalCount()}}</b>
+				items, <b>{{cart.getTotalPrice() | currency}}</b>
+		</a></td>
+	</tr>
+	
+</table>

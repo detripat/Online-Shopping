@@ -1,0 +1,84 @@
+<script type="text/javascript">
+function checkUser(){
+	
+	var test=$("#userNameId").val();
+	if(test == "Welcome Guest"){
+		alert("Please Login before you checkout");
+	}else{
+		return window.location.href='index.htm#/checkout';
+	}
+}
+</script>
+
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div>
+
+			<!-- items -->
+			<table>
+
+				<!-- header -->
+				<tr>
+					<td><b>Item</b></td>
+					<td class="tdCenter"><b>Quantity</b></td>
+					<td class="tdRight"><b>Price</b></td>
+					<td />
+				</tr>
+
+				<!-- empty cart message -->
+				<tr ng-hide="cart.getTotalCount() > 0">
+					<td class="tdCenter" colspan="4">Your cart is empty.</td>
+				</tr>
+
+				<!-- cart items -->
+				<tr ng-repeat="item in cart.items | orderBy:'name'" class="success">
+					<td>{{item.name}}</td>
+					<td class="tdCenter">
+						<div class="input-append">
+							<!-- use type=tel instead of  to prevent spinners -->
+							<input type="tel" ng-model="item.quantity"
+								ng-change="cart.saveItems()" />
+							<button type="button" ng-disabled="item.quantity >= 1000"
+								ng-click="cart.addItem(item.sku, item.name, item.price, +1)">+</button>
+							<button type="button" ng-disabled="item.quantity <= 1"
+								ng-click="cart.addItem(item.sku, item.name, item.price, -1)">-</button>
+						</div>
+					</td>
+					<td class="tdRight">{{item.price * item.quantity | currency}}</td>
+					<td class="tdCenter" title="remove from cart"><a href=""
+						ng-click="cart.addItem(item.sku, item.name, item.price, -10000000)">
+							<i class="icon-remove" />
+					</a></td>
+				</tr>
+
+				<!-- footer -->
+				<tr >
+					<td><b>Total</b></td>
+					<td class="tdCenter"><b>{{cart.getTotalCount()}}</b></td>
+					<td class="tdRight"><b>{{cart.getTotalPrice() | currency}}</b></td>
+					<td />
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div>
+		<p class="text-info">
+			<button 
+				onclick="window.location.href='index.htm'">
+				<i class="icon-chevron-left" />  store
+			</button>
+			<button  ng-click="cart.clearItems()" 
+				ng-disabled="cart.getTotalCount() < 1">
+				<i class="icon-trash icon-white" /> clear 
+			</button>
+			<button 
+				onclick="checkUser()"
+				ng-disabled="cart.getTotalCount() < 1">
+				<i class="icon-ok icon-white" />Check out
+			</button>
+		</p>
+	</div>
+
+</div>
