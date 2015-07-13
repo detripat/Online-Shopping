@@ -1,0 +1,215 @@
+
+CREATE TABLE PRODUCT_CATG(
+  `catg_id` BIGINT NOT NULL,
+  `catg_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`catg_id`)
+);
+COMMIT;
+--------------------------------------
+
+---Product_Pic
+
+CREATE TABLE product_pic (
+  `product_pic_id` BIGINT NOT NULL,
+  `product_id` BIGINT NOT NULL,
+  `pic_name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`product_pic_id`)
+);
+COMMIT;
+--------------------------------------
+-----PRODUCT
+
+CREATE TABLE PRODUCT ( 
+  `product_id` BIGINT NOT NULL, 
+  `product_name` varchar(45) NOT NULL, 
+  `product_price` DECIMAL(20, 2) NOT NULL, 
+  `product_pic_id` BIGINT NOT NULL, 
+  `product_catg_id` BIGINT NOT NULL, 
+  `product_quantity` BIGINT NOT NULL, 
+  `product_desc` varchar(45) NOT NULL, 
+  PRIMARY KEY (`product_id`) 
+ );
+COMMIT;
+------------------------------------------
+
+----USER
+
+CREATE TABLE USER (
+  `user_id` BIGINT NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `middle_name` varchar(45) ,
+  `last_name` varchar(45) NOT NULL,
+  `address_line1` varchar(45) ,
+  `address_line2` varchar(45) ,
+  `city` varchar(45) ,
+  `state` varchar(45) ,
+  `email` varchar(45) ,
+  user_type varchar(45),
+  PRIMARY KEY (`user_id`)
+);
+COMMIT;
+----------------------------------------------
+----Order_Master
+
+CREATE TABLE order_master (
+  `order_id` BIGINT NOT NULL,
+  `user_id` BIGINT NOT NULL,
+  `transaction_id` BIGINT NOT NULL,
+  `transaction_amount` DECIMAL(20, 2) NOT NULL,
+  `transaction_status` varchar(45) NOT NULL,
+  PRIMARY KEY (`order_id`), 
+);
+COMMIT;
+-------------------------------------------------
+----order_details
+
+CREATE TABLE order_details (
+  `order_id` BIGINT NOT NULL,
+  `product_id` BIGINT NOT NULL,
+  `product_quantity` BIGINT NOT NULL,
+  PRIMARY KEY (`product_id`,`order_id`)
+);
+COMMIT;
+
+--------------------------------------------------
+
+
+--Role_Master
+
+CREATE TABLE role_master(
+  `role_id` BIGINT NOT NULL,
+  `role_name` varchar(45) NOT NULL,
+  `feature_id` varchar(45) NOT NULL,
+  PRIMARY KEY (`role_id`)
+);
+COMMIT;
+------------------------------------------------------
+
+
+---User_Role_Map
+
+CREATE TABLE user_role_map ( 
+  `user_id` BIGINT NOT NULL, 
+  `role_id` BIGINT NOT NULL, 
+  PRIMARY KEY (`user_id`,`role_id`) 
+);
+COMMIT;
+
+---------------------------------------------------------
+
+
+---Foreign Key Relationship
+
+---Product_Pic
+
+ALTER TABLE product_pic
+ADD FOREIGN KEY (product_id)
+  REFERENCES PRODUCT (product_id);
+  COMMIT;
+-----------------------------------------------------------
+
+---PRODUCT
+
+ALTER TABLE PRODUCT
+ADD FOREIGN KEY (product_pic_id)
+  REFERENCES product_pic (product_pic_id);
+  COMMIT;
+
+ALTER TABLE PRODUCT 
+ADD FOREIGN KEY (product_catg_id) 
+  REFERENCES PRODUCT_CATG (catg_id);
+  COMMIT;
+
+------------------------------------------------------------
+---Order_master
+
+ALTER TABLE order_master
+ADD FOREIGN KEY (user_id)
+  REFERENCES USER (user_id);
+  COMMIT;
+----------------------------------------------------------
+---Order_Details
+
+ALTER TABLE order_details
+ADD FOREIGN KEY (order_id)
+  REFERENCES order_master (order_id);
+  COMMIT;
+
+ALTER TABLE order_details
+ADD FOREIGN KEY (product_id)
+  REFERENCES PRODUCT(product_id);
+  COMMIT;
+-----------------------------------------------------------
+----User_Role Map
+
+ALTER TABLE user_role_map
+ADD FOREIGN KEY (user_id)
+  REFERENCES USER(user_id);
+  COMMIT;
+
+ALTER TABLE user_role_map
+ADD FOREIGN KEY (role_id)
+  REFERENCES role_master(role_id);
+  COMMIT;
+  
+  -------------------------------------------------------
+  
+  
+  ALTER TABLE PRODUCT ALTER product_pic_id SET NULL;
+  
+  ALTER TABLE order_details ADD product_price DECIMAL(20, 2) NOT NULL;
+  
+  ALTER TABLE PRODUCT_PIC ALTER product_id SET NULL;
+  ALTER TABLE order_master ALTER user_id SET NULL;
+  ALTER TABLE order_master ALTER transaction_id SET NULL;
+  ALTER TABLE order_master ALTER transaction_amount SET NULL;
+  ALTER TABLE order_master ALTER transaction_status SET NULL;
+  ALTER TABLE order_master ALTER transaction_id varchar(200);
+  ALTER TABLE USER ADD user_type varchar(25) NOT NULL;
+  ---ALTER TABLE USER ALTER username SET NULL;
+--- ALTER TABLE USER ALTER password SET NULL;
+--- ALTER TABLE USER ALTER first_name SET NULL;
+--- ALTER TABLE USER ALTER middle_name SET NULL;
+  ---ALTER TABLE USER ALTER last_name SET NULL;
+   ---ALTER TABLE USER ALTER email SET NULL;
+  
+  COMMIT;
+  -------------------------------------------------------
+
+
+---- create sequence
+CREATE SEQUENCE order_seq START WITH 1 INCREMENT BY   1;
+CREATE SEQUENCE product_seq START WITH 1 INCREMENT BY   1;
+CREATE SEQUENCE product_catg_seq START WITH 1 INCREMENT BY   1;
+CREATE SEQUENCE product_pic_seq START WITH 1 INCREMENT BY   1;
+CREATE SEQUENCE roles_sequence START WITH 1 INCREMENT BY   1;
+CREATE SEQUENCE user_seq START WITH 1 INCREMENT BY   1;
+CREATE SEQUENCE order_details_seq START WITH 1 INCREMENT BY   1;
+
+---- drop sequence order_seq 
+---- drop sequence product_seq
+---- drop sequence product_catg_seq
+---- drop sequence product_pic_seq
+---- drop sequence roles_sequence
+---- drop sequence user_seq
+---- drop sequence order_details_seq
+
+---- not usable
+CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY   1;
+COMMIT;
+
+----------------insert scripts
+insert into  PRODUCT_CATG values(1,'Food Items');
+insert into  PRODUCT_CATG values(2,'Medicines');
+insert into  PRODUCT_CATG values(3,'Soap Items');
+COMMIT;
+
+insert into PRODUCT values(1,'Britania biscuit',22250.50,null,1,621,'Tasty biscuit');
+insert into PRODUCT values(2,'Chicken',11000,null,1,916,'good product');
+insert into PRODUCT values(3,'Paracitamal',4010,null,2,954,'most selling medicine');
+insert into PRODUCT values(4,'Lifeboy',2900,null,3,747,'Good soap');
+insert into PRODUCT values(5,'Anto oxidant',1300,null,2,721,'important medicine');
+
+COMMIT;
